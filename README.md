@@ -17,18 +17,19 @@ entry preserves the AOSP 12.1 r4 tag from the original local manifest.
 | Input | Revision |
 | --- | --- |
 | minimal-manifest-twrp `platform_manifest_twrp_aosp`, `default.xml` including `twrp-default.xml` | `6dc117d9cbd08430daa16db2013560e1c4017fa8` (observed local manifest HEAD) |
-| `android_device_sony_poplar_docomo-twrp` | `ee171c098acbc770127778f20d3e210f5494ac15` |
-| `android_twrp_so01k_patches` | `275a51148c36db489ce97d16fd32719a9e07fb50` |
+| [`keee-toy/android_device_sony_poplar_docomo-twrp`](https://github.com/keee-toy/android_device_sony_poplar_docomo-twrp) | `ee171c098acbc770127778f20d3e210f5494ac15` |
+| [`keee-toy/android_twrp_so01k_patches`](https://github.com/keee-toy/android_twrp_so01k_patches) | `6082a6c5869549b336818679ca516101f938ed96` |
+| Kernel base [`ATI-Experiments/android_kernel_sony_msm8998`](https://github.com/ATI-Experiments/android_kernel_sony_msm8998), `lineage-22.1` | `7a4c7d73f8ec401b89bd1ab815d2b4ccf801ec3f` plus two patches in `external/so01k-patches/kernel-source/` |
 | TeamWin `android_system_vold` | `a164ba05c5fef288059774a776b2e6e1119957cf` |
 | TeamWin `android_device_qcom_twrp-common` | `98506f7919102378c8d52ee7d6a94a867f1b4c55` |
 | TeamWin `android_bootable_recovery` | `5c3d206a5eeb3d446bcda8248a405a4b278bab5c` |
 | AOSP `platform/test/vts-testcase/fuzz` | `refs/tags/android-12.1.0_r4` |
 
 `local_manifests/so01k-p451-public.xml` targets the manifest's `default.xml`,
-which includes TeamWin `twrp-default.xml`. Replace `REPLACE_WITH_OWNER` with the actual
-future GitHub owner after publication, and copy the XML into a fresh checkout's
-`.repo/local_manifests/` before syncing. The XML is a publication template; no
-GitHub repositories are created or fetched in Phase 1B. The base manifest
+which includes TeamWin `twrp-default.xml`. It points to the intended public
+repositories under the verified owner `keee-toy`; those repositories must be
+created and populated before a public sync. Copy the XML into a fresh
+checkout's `.repo/local_manifests/` before syncing. The base manifest
 revision above is recorded for compatibility; unrelated projects are not
 individually pinned here, so this is a pinned patch-input manifest rather than
 a complete lockfile for every project in a TWRP checkout.
@@ -49,13 +50,19 @@ When the public repositories are available, the source-only process is:
 ```sh
 repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1 -m default.xml
 git -C .repo/manifests checkout 6dc117d9cbd08430daa16db2013560e1c4017fa8
-# Copy and edit local_manifests/so01k-p451-public.xml into .repo/local_manifests/.
+# Copy local_manifests/so01k-p451-public.xml into .repo/local_manifests/.
 repo sync
 external/so01k-patches/apply-p451-public.sh "$PWD"
 ```
 
 The setup script rejects unexpected project
 HEADs and does not copy private blobs, download them, or build automatically.
+The custom kernel prebuilt is tracked in the device repository; its SHA-256 is
+`c6d8affd56de7e72dc9729feb3215b6faacff87b91cc04504851ce5f1379752c`.
+The pinned public kernel base, two source patches, extracted build config, and
+license/provenance notes are in the [patches repository's kernel source guide](https://github.com/keee-toy/android_twrp_so01k_patches/blob/main/kernel-source/README.md).
+No private kernel checkout or fourth GitHub repository is required to obtain
+this public source state. The public source setup does not rebuild the kernel.
 The public device tree has the P4.51 `/system_root` System backup mapping;
 its `twrp.flags` SHA-256 is
 `c579edbb131dd7e7e2f2a3b8abfafe30b3172883b2af34fedf986e4c317f2c39`.

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-    <!-- Template: replace REPLACE_WITH_OWNER with the future public GitHub owner. -->
-    <remote name="so01k-public" fetch="https://github.com/REPLACE_WITH_OWNER/" />
+    <!-- Public SO-01K preservation repositories under the verified owner. -->
+    <remote name="so01k-public" fetch="https://github.com/keee-toy/" />
 
     <project path="device/sony/poplar_docomo"
              name="android_device_sony_poplar_docomo-twrp"
@@ -10,7 +10,7 @@
     <project path="external/so01k-patches"
              name="android_twrp_so01k_patches"
              remote="so01k-public"
-             revision="275a51148c36db489ce97d16fd32719a9e07fb50" />
+             revision="6082a6c5869549b336818679ca516101f938ed96" />
 
     <!-- Exact TeamWin bases required by the public patch script. -->
     <extend-project name="android_system_vold" path="system/vold"
