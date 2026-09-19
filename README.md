@@ -33,6 +33,17 @@ revision above is recorded for compatibility; unrelated projects are not
 individually pinned here, so this is a pinned patch-input manifest rather than
 a complete lockfile for every project in a TWRP checkout.
 
+For a local checkout before publication, render a separate file URL manifest
+from the two requested local repositories. The renderer checks their pinned
+HEADs and writes the machine-specific URL only to the selected output file:
+
+```sh
+python3 render-local-manifest.py /path/to/local-repos > /path/to/twrp-12.1/.repo/local_manifests/so01k-p451-local.xml
+```
+
+Do not commit the rendered file; it contains the local filesystem path. The
+renderer does not sync or build.
+
 When the public repositories are available, the source-only process is:
 
 ```sh
