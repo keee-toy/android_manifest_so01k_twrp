@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!-- Template: replace REPLACE_WITH_OWNER with the future public GitHub owner. -->
+    <remote name="so01k-public" fetch="https://github.com/REPLACE_WITH_OWNER/" />
+
+    <project path="device/sony/poplar_docomo"
+             name="android_device_sony_poplar_docomo-twrp"
+             remote="so01k-public"
+             revision="ee171c098acbc770127778f20d3e210f5494ac15" />
+    <project path="external/so01k-patches"
+             name="android_twrp_so01k_patches"
+             remote="so01k-public"
+             revision="275a51148c36db489ce97d16fd32719a9e07fb50" />
+
+    <!-- Exact TeamWin bases required by the public patch script. -->
+    <extend-project name="android_system_vold" path="system/vold"
+                    revision="a164ba05c5fef288059774a776b2e6e1119957cf" />
+    <extend-project name="android_device_qcom_twrp-common" path="device/qcom/twrp-common"
+                    revision="98506f7919102378c8d52ee7d6a94a867f1b4c55" />
+    <extend-project name="android_bootable_recovery" path="bootable/recovery"
+                    revision="5c3d206a5eeb3d446bcda8248a405a4b278bab5c" />
+
+    <!-- Original SO-01K VTS fuzzer local manifest, pinned to AOSP 12.1 r4. -->
+    <project path="test/vts-testcase/fuzz"
+             name="platform/test/vts-testcase/fuzz"
+             remote="aosp"
+             revision="refs/tags/android-12.1.0_r4"
+             groups="vts,projectarch,pdk" />
+</manifest>
