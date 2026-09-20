@@ -10,7 +10,7 @@
     <project path="external/so01k-patches"
              name="android_twrp_so01k_patches"
              remote="so01k-public"
-             revision="6082a6c5869549b336818679ca516101f938ed96" />
+             revision="f11e2cf314cb7db4818c257a4cb77c49820e2631" />
 
     <!-- Exact TeamWin bases required by the public patch script. -->
     <extend-project name="android_system_vold" path="system/vold"

@@ -18,7 +18,7 @@ entry preserves the AOSP 12.1 r4 tag from the original local manifest.
 | --- | --- |
 | minimal-manifest-twrp `platform_manifest_twrp_aosp`, `default.xml` including `twrp-default.xml` | `6dc117d9cbd08430daa16db2013560e1c4017fa8` (observed local manifest HEAD) |
 | [`keee-toy/android_device_sony_poplar_docomo-twrp`](https://github.com/keee-toy/android_device_sony_poplar_docomo-twrp) | `5829c6eacb6bbe96df7017f9ac1c18e735fde2b2` |
-| [`keee-toy/android_twrp_so01k_patches`](https://github.com/keee-toy/android_twrp_so01k_patches) | `6082a6c5869549b336818679ca516101f938ed96` |
+| [`keee-toy/android_twrp_so01k_patches`](https://github.com/keee-toy/android_twrp_so01k_patches) | `f11e2cf314cb7db4818c257a4cb77c49820e2631` |
 | Kernel base [`ATI-Experiments/android_kernel_sony_msm8998`](https://github.com/ATI-Experiments/android_kernel_sony_msm8998), `lineage-22.1` | `7a4c7d73f8ec401b89bd1ab815d2b4ccf801ec3f` plus two patches in `external/so01k-patches/kernel-source/` |
 | TeamWin `android_system_vold` | `a164ba05c5fef288059774a776b2e6e1119957cf` |
 | TeamWin `android_device_qcom_twrp-common` | `98506f7919102378c8d52ee7d6a94a867f1b4c55` |
@@ -27,14 +27,21 @@ entry preserves the AOSP 12.1 r4 tag from the original local manifest.
 
 `local_manifests/so01k-p451-public.xml` targets the manifest's `default.xml`,
 which includes TeamWin `twrp-default.xml`. It points to the intended public
-repositories under the verified owner `keee-toy`; those repositories must be
-created and populated before a public sync. Copy the XML into a fresh
+repositories under the verified owner `keee-toy`; those repositories are
+published and pinned above. Copy the XML into a fresh
 checkout's `.repo/local_manifests/` before syncing. The base manifest
 revision above is recorded for compatibility; unrelated projects are not
 individually pinned here, so this is a pinned patch-input manifest rather than
 a complete lockfile for every project in a TWRP checkout.
 
-For a local checkout before publication, render a separate file URL manifest
+The device pin selects the final normalized `5829c6e` source. P4.47 framework
+VINTF and P4.51 `/system_root` are already committed there. The pinned patches
+script checks those files in place and applies only the P4.46, P4.49, and
+prepdecrypt upstream deltas. Phase 2 independent GitHub verification found an
+earlier script guard for `ee171c0` that rejected this device pin; the Phase 2.1
+patches commit corrects that guard without reverting or changing the device.
+
+For a matching local checkout, render a separate file URL manifest
 from the two requested local repositories. The renderer checks their pinned
 HEADs and writes the machine-specific URL only to the selected output file:
 
@@ -45,7 +52,7 @@ python3 render-local-manifest.py /path/to/local-repos > /path/to/twrp-12.1/.repo
 Do not commit the rendered file; it contains the local filesystem path. The
 renderer does not sync or build.
 
-When the public repositories are available, the source-only process is:
+For a public checkout, the source-only process is:
 
 ```sh
 repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1 -m default.xml
