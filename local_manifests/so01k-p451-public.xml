@@ -6,7 +6,7 @@
     <project path="device/sony/poplar_docomo"
              name="android_device_sony_poplar_docomo-twrp"
              remote="so01k-public"
-             revision="ee171c098acbc770127778f20d3e210f5494ac15" />
+             revision="5829c6eacb6bbe96df7017f9ac1c18e735fde2b2" />
     <project path="external/so01k-patches"
              name="android_twrp_so01k_patches"
              remote="so01k-public"

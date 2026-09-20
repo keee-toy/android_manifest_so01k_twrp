@@ -17,7 +17,7 @@ entry preserves the AOSP 12.1 r4 tag from the original local manifest.
 | Input | Revision |
 | --- | --- |
 | minimal-manifest-twrp `platform_manifest_twrp_aosp`, `default.xml` including `twrp-default.xml` | `6dc117d9cbd08430daa16db2013560e1c4017fa8` (observed local manifest HEAD) |
-| [`keee-toy/android_device_sony_poplar_docomo-twrp`](https://github.com/keee-toy/android_device_sony_poplar_docomo-twrp) | `ee171c098acbc770127778f20d3e210f5494ac15` |
+| [`keee-toy/android_device_sony_poplar_docomo-twrp`](https://github.com/keee-toy/android_device_sony_poplar_docomo-twrp) | `5829c6eacb6bbe96df7017f9ac1c18e735fde2b2` |
 | [`keee-toy/android_twrp_so01k_patches`](https://github.com/keee-toy/android_twrp_so01k_patches) | `6082a6c5869549b336818679ca516101f938ed96` |
 | Kernel base [`ATI-Experiments/android_kernel_sony_msm8998`](https://github.com/ATI-Experiments/android_kernel_sony_msm8998), `lineage-22.1` | `7a4c7d73f8ec401b89bd1ab815d2b4ccf801ec3f` plus two patches in `external/so01k-patches/kernel-source/` |
 | TeamWin `android_system_vold` | `a164ba05c5fef288059774a776b2e6e1119957cf` |
